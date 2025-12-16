@@ -4,27 +4,13 @@ import tensorflow as tf
 from tensorflow.keras.datasets import imdb
 from tensorflow.keras.preprocessing import sequence
 from tensorflow.keras.models import load_model
-from tensorflow.keras.layers import SimpleRNN as KerasSimpleRNN
 
 # Load the IMDB dataset word index
 word_index = imdb.get_word_index()
 reverse_word_index = {value: key for key, value in word_index.items()}
 
-
-# Compatibility wrapper for legacy SimpleRNN configs that include
-# unsupported arguments like `time_major` when running on Keras 3
-class SimpleRNNCompat(KerasSimpleRNN):
-    def __init__(self, *args, time_major=None, **kwargs):
-        # Ignore legacy `time_major` argument and delegate the rest
-        super().__init__(*args, **kwargs)
-
-
-# Load the pre-trained model with a custom SimpleRNN that can handle
-# the legacy `time_major` argument used when the model was saved.
-model = load_model(
-    'simple_rnn_imdb.h5',
-    custom_objects={'SimpleRNN': SimpleRNNCompat},
-)
+# Load the pre-trained model (built and saved with TensorFlow/Keras 2.x)
+model = load_model('simple_rnn_imdb.h5')
 
 # Step 2: Helper Functions
 # Function to decode reviews

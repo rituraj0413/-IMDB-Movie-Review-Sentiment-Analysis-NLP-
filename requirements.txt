@@ -1,8 +1,8 @@
 streamlit==1.42.0
 
-# Use TensorFlow 2.20.0 which is supported on Python 3.13
-# (the version used by Streamlit Cloud).
-tensorflow==2.20.0
+# Local run: use TensorFlow 2.15.0 (bundles Keras 2.x, compatible
+# with the legacy `simple_rnn_imdb.h5` model).
+tensorflow==2.15.0
 
 numpy==1.26.4
 

@@ -1,5 +1,16 @@
-streamlit==1.28.1
+streamlit==1.42.0
+
+# NOTE: The pre-trained model `simple_rnn_imdb.h5` was saved with the
+# TensorFlow/Keras 2.x stack. It is NOT compatible with Keras 3.x,
+# which is why loading it currently fails with:
+#   ValueError: Unrecognized keyword arguments passed to SimpleRNN: {'time_major': False}
+#
+# Pin TensorFlow to a 2.15.x release, which bundles Keras 2.15 and can
+# successfully deserialize this legacy H5 model.
 tensorflow==2.15.0
-numpy
+
+# Pin numpy to a version compatible with TF 2.15
+numpy==1.26.4
+
 pandas
 scikit-learn
